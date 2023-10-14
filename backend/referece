@@ -1,0 +1,34 @@
+// when relative address "/" is accessed with "request", reply with "response"
+router.get("/", (request,response) => {
+    response.send("Backed service is up and running");
+});
+
+router.get("/sum", (request,response) => {
+    const a = parseFloat(request.query.a);
+    const b = parseFloat(request.query.b);
+    let sum = a + b;
+    response.send("Sum is " + sum);
+});
+// POST uses params from body
+router.post("/add-product", (request,response) => {
+    const { name, price, brand } = request.body;
+    response.send(`Product ${name} of ${brand} added for ${price}`);
+});
+
+// DEL uses params from query, like GET
+router.delete("/delete-product", (request,response) => {
+    const {id} = request.query;
+    response.send(`Deleted item of ID ${id}`);
+});
+
+// PUT can get params from query and body
+router.put("/update-product-by-id", (request,response) => {
+    const id = request.query;
+    const { name, price, brand } = request.body;
+
+    if (!id || !name || !price || !brand) {
+        response.status(400).send("something missing");
+    } else {
+        response.send(`updated product ID ${id} with the following ${name} ${brand} ${price}`);
+    }
+});
