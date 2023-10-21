@@ -15,4 +15,4 @@ Deployment - Firebase API
 
 Hosting - Firebase
 
-Domain - Google Domains (owlidity.com)
+Domain - Google Domains (owlidity.web.app)
